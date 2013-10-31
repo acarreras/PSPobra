@@ -158,7 +158,7 @@ void testApp::setup(){
 	#ifdef _USE_LIVE_VIDEO
         vidGrabber.setVerbose(true);
         vidGrabber.listDevices();
-        vidGrabber.setDeviceID(0); // uEye = 3
+        vidGrabber.setDeviceID(3); // uEye = 3
         vidGrabber.initGrabber(camWidth, camHeight);
 	#else
         vidPlayer.loadMovie("fingers.mov");
@@ -216,22 +216,22 @@ void testApp::setup(){
     guiESCENA->addSpacer(2);
     guiESCENA->addLabel("ESCENA1", OFX_UI_FONT_MEDIUM);
 	vector<string> vnames;
-	vnames.push_back("1ENTRADA");    // estatEscena1 = 1
-	vnames.push_back("1ESBORRA");    // estatEscena1 = 2
-	vnames.push_back("1LLAPIS");     // estatEscena1 = 3
-	vnames.push_back("1GARGOTS");    // 4
-	vnames.push_back("1TRENCA");     // 5
-	vnames.push_back("1BORRA alpha");// 6
-	vnames.push_back("1TAQUES");     // 7
-	vnames.push_back("1BORRA fi");   // 8
+	vnames.push_back("1ENTRADAblanc");    // estatEscena1 = 1
+	vnames.push_back("1ESBORRAnegre");    // estatEscena1 = 2
+	vnames.push_back("1PINTAgroc");     // estatEscena1 = 3
+	vnames.push_back("1PINTAvmll");    // 4
+	vnames.push_back("1PINTAblanc");     // 5
+	vnames.push_back("1BORRAalpha");// 6
+	vnames.push_back("1PINTAgranat");     // 7
+	vnames.push_back("1BORRAfi");   // 8
 	guiESCENA->addRadio("escena1", vnames, OFX_UI_ORIENTATION_VERTICAL);
 	guiESCENA->addSpacer(2);
 	guiESCENA->addLabel("ESCENA2", OFX_UI_FONT_MEDIUM);
 	vnames.clear();
-	vnames.push_back("2CEZANNE");   // estatEscena2 = 1
-	vnames.push_back("2PINTA GP");  // estatEscena2 = 2
-	vnames.push_back("2BORRA G");   // estatEscena2 = 3
-	vnames.push_back("2RATLLOTS");  // 4
+	vnames.push_back("2ENTRADAnegre");   // estatEscena2 = 1
+	vnames.push_back("2PINTArosa");  // estatEscena2 = 2
+	vnames.push_back("2BORRAnegre");   // estatEscena2 = 3
+	vnames.push_back("2PINTAblau");  // 4
 	guiESCENA->addRadio("escena2", vnames, OFX_UI_ORIENTATION_VERTICAL);
 	guiESCENA->addSpacer(2);
 
@@ -507,87 +507,87 @@ void testApp::dragEvent(ofDragInfo dragInfo){
 void testApp::drawEscena1(){
 
     if(estatEscena1 == 1){ // ENTRADA
-        ofSetColor(0,0,0,255);
+        ofSetColor(255,255,255,255);
         ofRect(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
 
         ofSetColor(255,255,255,255);
-        imgSalaSo.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
+        ofRect(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
     }
-    else if(estatEscena1 == 2){ // ESBORRA
-        ofSetColor(0,0,0,255);
+    else if(estatEscena1 == 2){ // ESBORRA negre
+        ofSetColor(255,255,255,255);
         ofRect(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
 
         // http://stackoverflow.com/questions/5097145/opengl-mask-with-multiple-textures
         // http://forum.openframeworks.cc/index.php/topic,339.0.html -> solucio crear textura a ma
         ofEnableAlphaBlending();
         ofSetColor(255,255,255,255);
-        imgSalaSo.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
+        ofRect(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
         ofSetColor(0,0,0,255);
         textTracPintemP.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
         ofDisableAlphaBlending();
     }
-    else if(estatEscena1 == 3){ // LLAPIS
-        ofSetColor(0,0,0,255);
+    else if(estatEscena1 == 3){ // PINTA groc
+        ofSetColor(255,255,255,255);
         ofRect(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
 
         ofEnableAlphaBlending();
         ofSetColor(255,255,255,255);
-        capturaElQuePintaIlona.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
+        capturaElQuePintaIlonaP.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
         ofSetColor(255,200,0,255);
         textTracPintemP.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
         ofDisableAlphaBlending();
     }
-    else if(estatEscena1 == 4){ // GARGOTS
-        ofSetColor(0,0,0,255);
+    else if(estatEscena1 == 4){ // PINTA vermell
+        ofSetColor(255,255,255,255);
         ofRect(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
 
         ofEnableAlphaBlending();
         ofSetColor(255,255,255,255);
-        capturaElQuePintaIlona.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
+        capturaElQuePintaIlonaP.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
         ofSetColor(255,0,0,255);
         textTracPintemP.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
         ofDisableAlphaBlending();
     }
-    else if(estatEscena1 == 5){ // TRENCA
-        ofSetColor(0,0,0,255);
+    else if(estatEscena1 == 5){ // PINTA blanc
+        ofSetColor(255,255,255,255);
         ofRect(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
 
         ofEnableAlphaBlending();
         ofSetColor(255,255,255,255);
-        capturaElQuePintaIlona.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
+        capturaElQuePintaIlonaP.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
         ofSetColor(255,255,255,255);
         textTracPintemP.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
         ofDisableAlphaBlending();
     }
     else if(estatEscena1 == 6){ // BORRA alpha
-        ofSetColor(0,0,0,255);
+        ofSetColor(255,255,255,255);
         ofRect(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
 
         ofEnableAlphaBlending();
         ofSetColor(255,255,255,255);
-        capturaElQuePintaIlona.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
-        ofSetColor(0,0,0,128);
+        capturaElQuePintaIlonaP.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
+        ofSetColor(255,255,255,180);
         textTracPintemP.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
         ofDisableAlphaBlending();
     }
-    else if(estatEscena1 == 7){ // TAQUES
-        ofSetColor(0,0,0,255);
+    else if(estatEscena1 == 7){ // PINTA granate o marro
+        ofSetColor(255,255,255,255);
         ofRect(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
 
         ofEnableAlphaBlending();
         ofSetColor(255,255,255,255);
-        capturaElQuePintaIlona.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
-        ofSetColor(200,20,0,255);
+        capturaElQuePintaIlonaP.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
+        ofSetColor(240,100,0,255);
         textTracPintemP.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
         ofDisableAlphaBlending();
     }
     else if(estatEscena1 == 8){ // BORRA FI
-        ofSetColor(0,0,0,255);
+        ofSetColor(255,255,255,255);
         ofRect(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
 
         ofEnableAlphaBlending();
         ofSetColor(255,255,255,255);
-        capturaElQuePintaIlona.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
+        capturaElQuePintaIlonaP.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
         ofSetColor(0,0,0,255);
         textTracPintemP.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
         ofDisableAlphaBlending();
@@ -597,55 +597,55 @@ void testApp::drawEscena1(){
 //--------------------------------------------------------------
 void testApp::drawEscena2(){
 
-    if(estatEscena2 == 1){ // CEZZANE
-        ofSetColor(255,255,255,255);
-        imgQuadreCezanne.draw(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
+    if(estatEscena2 == 1){ // ENTRADA en negre
+        ofSetColor(0,0,0,255);
+        ofRect(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
 
-        ofSetColor(50,50,255,255);
+        ofSetColor(0,0,0,255);
         ofRect(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
     }
-    if(estatEscena2 == 2){ // PINTA GP
+    if(estatEscena2 == 2){ // PINTA G rosa PINTA P groc
         ofEnableAlphaBlending();
         ofSetColor(255,255,255,255);
-        imgQuadreCezanne.draw(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
-        ofSetColor(50,50,255,255);
+        ofRect(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
+        ofSetColor(250,0,255,255);
         textTracPintemG.draw(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
         ofDisableAlphaBlending();
 
         ofEnableAlphaBlending();
-        ofSetColor(50,50,255,255);
-        ofRect(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);ofSetColor(0,0,0,255);
-        ofSetColor(50,250,55,255);
+        ofSetColor(255,255,255,255);
+        capturaElQuePintaIlonaP.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);ofSetColor(0,0,0,255);
+        ofSetColor(255,255,0,255);
         textTracPintemP.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
         ofDisableAlphaBlending();
     }
-    if(estatEscena2 == 3){ // BORRA G
+    if(estatEscena2 == 3){ // BORRA G PINTA P gris
         ofEnableAlphaBlending();
         ofSetColor(255,255,255,255);
-        capturaElQuePintaIlona.draw(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
-        ofSetColor(0,0,0,255);
+        capturaElQuePintaIlonaG.draw(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
+        ofSetColor(255,255,255,255);
         textTracPintemG.draw(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
         ofDisableAlphaBlending();
 
         ofEnableAlphaBlending();
-        ofSetColor(50,50,255,255);
-        ofRect(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);ofSetColor(0,0,0,255);
-        ofSetColor(50,250,55,255);
+        ofSetColor(255,255,255,255);
+        capturaElQuePintaIlonaP.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);ofSetColor(0,0,0,255);
+        ofSetColor(128,128,128,255);
         textTracPintemP.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
         ofDisableAlphaBlending();
     }
-    if(estatEscena2 == 4){ // RATLLOTS a la gran
+    if(estatEscena2 == 4){ // PINTA G blau PINTA P blanc
         ofEnableAlphaBlending();
         ofSetColor(255,255,255,255);
-        capturaElQuePintaIlona.draw(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
-        ofSetColor(255,255,255,255);
+        capturaElQuePintaIlonaG.draw(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
+        ofSetColor(0,0,255,255);
         textTracPintemG.draw(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
         ofDisableAlphaBlending();
 
         ofEnableAlphaBlending();
-        ofSetColor(50,50,255,255);
-        ofRect(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);ofSetColor(0,0,0,255);
-        ofSetColor(50,250,55,255);
+        ofSetColor(255,255,255,255);
+        capturaElQuePintaIlonaP.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);ofSetColor(0,0,0,255);
+        ofSetColor(255,255,255,255);
         textTracPintemP.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
         ofDisableAlphaBlending();
     }
@@ -826,70 +826,71 @@ void testApp::guiEvent(ofxUIEventArgs &e)
 	}
 
 	// ESCENA 1
-	else if(name == "1ENTRADA"){
+	else if(name == "1ENTRADAblanc"){
 		estatEscena1 = 1;
 	}
-	else if(name == "1ESBORRA"){
+	else if(name == "1ESBORRAnegre"){
 		estatEscena1 = 2;
 		bclearPantallaP = true;
 		bpintaPantallaP = true;
 	}
-	else if(name == "1LLAPIS"){
+	else if(name == "1PINTAgroc"){
 	    estatEscena1 = 3;
 		bclearPantallaP = true;
 		bpintaPantallaP = true;
-		capturaElQuePintaIlona.grabScreen(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
+		capturaElQuePintaIlonaP.grabScreen(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
 	}
-	else if(name == "1GARGOTS"){
+	else if(name == "1PINTAvmll"){
 		estatEscena1 = 4;
 		bclearPantallaP = true;
 		bpintaPantallaP = true;
-        capturaElQuePintaIlona.grabScreen(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
+        capturaElQuePintaIlonaP.grabScreen(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
 	}
-	else if(name == "1TRENCA"){
+	else if(name == "1PINTAblanc"){
         estatEscena1 = 5;
         bclearPantallaP = true;
 		bpintaPantallaP = true;
-        capturaElQuePintaIlona.grabScreen(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
+        capturaElQuePintaIlonaP.grabScreen(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
 	}
-	else if(name == "1BORRA alpha"){
+	else if(name == "1BORRAalpha"){
 		estatEscena1 = 6;
 		bclearPantallaP = true;
 		bpintaPantallaP = true;
-        capturaElQuePintaIlona.grabScreen(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
+        capturaElQuePintaIlonaP.grabScreen(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
 	}
-	else if(name == "1TAQUES"){
+	else if(name == "1PINTAgranat"){
 		estatEscena1 = 7;
 		bclearPantallaP = true;
 		bpintaPantallaP = true;
-        capturaElQuePintaIlona.grabScreen(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
+        capturaElQuePintaIlonaP.grabScreen(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
 	}
-	else if(name == "1BORRA fi"){
+	else if(name == "1BORRAfi"){
 		estatEscena1 = 8;
 		bclearPantallaP = true;
 		bpintaPantallaP = true;
 	}
-	else if(name == "2CEZANNE"){
+	else if(name == "2ENTRADAnegre"){
 		estatEscena1 = 0;
 		estatEscena2 = 1;
 	}
-	else if(name == "2PINTA GP"){
+	else if(name == "2PINTArosa"){
+	    estatEscena1 = 0;
 		estatEscena2 = 2;
 		bclearPantallaG = true;
 		bpintaPantallaG = true;
 		bclearPantallaP = true;
 		bpintaPantallaP = true;
 	}
-	else if(name == "2BORRA G"){
+	else if(name == "2BORRAnegre"){
 		estatEscena2 = 3;
-		capturaElQuePintaIlona.grabScreen(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
+		capturaElQuePintaIlonaG.grabScreen(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
         bclearPantallaG = true;
 		bpintaPantallaG = true;
 		bpintaPantallaP = true;
 	}
-	else if(name == "2RATLLOTS"){
+	else if(name == "2PINTAblau"){
 		estatEscena2 = 4;
-		capturaElQuePintaIlona.grabScreen(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
+		capturaElQuePintaIlonaG.grabScreen(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
         bclearPantallaG = true;
 		bpintaPantallaG = true;
 		bpintaPantallaP = true;

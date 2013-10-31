@@ -76,7 +76,7 @@ class testApp : public ofBaseApp{
         unsigned char * pixelsGrayImage;
 
         // ESCENES
-        ofImage capturaElQuePintaIlona;
+        ofImage capturaElQuePintaIlonaG, capturaElQuePintaIlonaP;
 
         // ESCENA 1
         void drawEscena1();
