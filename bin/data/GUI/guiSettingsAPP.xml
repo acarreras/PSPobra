@@ -4,26 +4,6 @@
     <Value>1</Value>
 </Widget>
 <Widget>
-    <Kind>2</Kind>
-    <Name>bpintaPantallaG</Name>
-    <Value>1</Value>
-</Widget>
-<Widget>
-    <Kind>2</Kind>
-    <Name>bimgPantallaG</Name>
-    <Value>0</Value>
-</Widget>
-<Widget>
-    <Kind>2</Kind>
-    <Name>bpintaPantallaP</Name>
-    <Value>1</Value>
-</Widget>
-<Widget>
-    <Kind>2</Kind>
-    <Name>bimgPantallaP</Name>
-    <Value>0</Value>
-</Widget>
-<Widget>
     <Kind>4</Kind>
     <Name>red</Name>
     <Value>152.205651104</Value>
@@ -31,7 +11,7 @@
 <Widget>
     <Kind>4</Kind>
     <Name>green</Name>
-    <Value>62.721775174</Value>
+    <Value>71.556118727</Value>
 </Widget>
 <Widget>
     <Kind>4</Kind>

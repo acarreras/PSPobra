@@ -22,13 +22,13 @@
 	<File name="..\..\..\addons\ofxUI\src\ofxUISlider.h" open="0" top="0" tabpos="0">
 		<Cursor position="9278" topLine="332" />
 	</File>
-	<File name="src\main.cpp" open="1" top="0" tabpos="3">
+	<File name="src\main.cpp" open="1" top="0" tabpos="2">
 		<Cursor position="216" topLine="0" />
 	</File>
 	<File name="src\testApp.cpp" open="1" top="1" tabpos="1">
-		<Cursor position="17467" topLine="368" />
+		<Cursor position="27240" topLine="628" />
 	</File>
-	<File name="src\testApp.h" open="1" top="0" tabpos="2">
-		<Cursor position="2456" topLine="62" />
+	<File name="src\testApp.h" open="1" top="0" tabpos="3">
+		<Cursor position="2747" topLine="69" />
 	</File>
 </CodeBlocks_layout_file>

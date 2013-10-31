@@ -16,29 +16,29 @@
 <Widget>
     <Kind>4</Kind>
     <Name>thresholdPantallaG</Name>
-    <Value>187.346940637</Value>
+    <Value>131.403059363</Value>
 </Widget>
 <Widget>
     <Kind>11</Kind>
     <Name>warpSrcPantallaG0</Name>
-    <XValue>19.925926208</XValue>
+    <XValue>113.777778625</XValue>
     <YValue>170.666667938</YValue>
 </Widget>
 <Widget>
     <Kind>11</Kind>
     <Name>warpSrcPantallaG1</Name>
-    <XValue>6.925926208</XValue>
-    <YValue>290.200012207</YValue>
+    <XValue>659.911132812</XValue>
+    <YValue>375.466667175</YValue>
 </Widget>
 <Widget>
     <Kind>11</Kind>
     <Name>warpSrcPantallaG2</Name>
-    <XValue>500.622222900</XValue>
-    <YValue>418.133331299</YValue>
+    <XValue>1008.829650879</XValue>
+    <YValue>691.199935913</YValue>
 </Widget>
 <Widget>
     <Kind>11</Kind>
     <Name>warpSrcPantallaG3</Name>
-    <XValue>197.874069214</XValue>
-    <YValue>171.066661835</YValue>
+    <XValue>402.014801025</XValue>
+    <YValue>68.266668320</YValue>
 </Widget>

@@ -20,14 +20,10 @@ void testApp::setup(){
     guiAPP->addToggle("bcalibrant", false, dim, dim);
     guiAPP->addSpacer(2);
     guiAPP->addWidgetDown(new ofxUILabel("PINTA PANTALLA GRAN", OFX_UI_FONT_MEDIUM));
-    guiAPP->addToggle("bpintaPantallaG", false, dim, dim);
     guiAPP->addButton("bclearPantallaG", false, dim, dim);
-    guiAPP->addToggle("bimgPantallaG", false, dim, dim);
     guiAPP->addSpacer(2);
     guiAPP->addWidgetDown(new ofxUILabel("PINTA PETITA", OFX_UI_FONT_MEDIUM));
-    guiAPP->addToggle("bpintaPantallaP", false, dim, dim);
     guiAPP->addButton("bclearPantallaP", false, dim, dim);
-    guiAPP->addToggle("bimgPantallaP", false, dim, dim);
     guiAPP->addSpacer(2);
     guiAPP->addWidgetDown(new ofxUILabel("COLOR PINTA", OFX_UI_FONT_MEDIUM));
     guiAPP->addSlider("red", 0.0, 255.0, red);
@@ -57,7 +53,7 @@ void testApp::setup(){
     sliderthG->setIncrement(1.0f);
     guiG->addSpacer(2);
     guiG->addWidgetDown(new ofxUILabel("WARP", OFX_UI_FONT_MEDIUM));
-    guiG->addButton("bsetWARPQUADPantallaG", false, dim, dim);
+    guiG->addButton("bsetWARPPantallaG", false, dim, dim);
     guiG->addWidgetDown(new ofxUI2DPad(dim*9, dim*6, ofPoint(0,ofGetWidth()),ofPoint(0,ofGetHeight()), warpSrcPantallaG[0], "warpSrcPantallaG0"));
     guiG->addWidgetDown(new ofxUI2DPad(dim*9, dim*6, ofPoint(0,ofGetWidth()),ofPoint(0,ofGetHeight()), warpSrcPantallaG[1], "warpSrcPantallaG1"));
     guiG->addWidgetDown(new ofxUI2DPad(dim*9, dim*6, ofPoint(0,ofGetWidth()),ofPoint(0,ofGetHeight()), warpSrcPantallaG[2], "warpSrcPantallaG2"));
@@ -104,7 +100,7 @@ void testApp::setup(){
     sliderthP->setIncrement(1.0f);
     guiP->addSpacer(2);
     guiP->addWidgetDown(new ofxUILabel("WARP", OFX_UI_FONT_MEDIUM));
-    guiP->addButton("bsetWARPQUADPantallaP", false, dim, dim);
+    guiP->addButton("bsetWARPPantallaP", false, dim, dim);
     guiP->addWidgetDown(new ofxUI2DPad(dim*9, dim*6, ofPoint(0,ofGetWidth()),ofPoint(0,ofGetHeight()), warpSrcPantallaP[0], "warpSrcPantallaP0"));
     guiP->addWidgetDown(new ofxUI2DPad(dim*9, dim*6, ofPoint(0,ofGetWidth()),ofPoint(0,ofGetHeight()), warpSrcPantallaP[1], "warpSrcPantallaP1"));
     guiP->addWidgetDown(new ofxUI2DPad(dim*9, dim*6, ofPoint(0,ofGetWidth()),ofPoint(0,ofGetHeight()), warpSrcPantallaP[2], "warpSrcPantallaP2"));
@@ -207,24 +203,41 @@ void testApp::setup(){
 
     // carrega IMG
     imgSalaSo.loadImage(ofToDataPath("IMG/saladelso-fonsnet.png"));
-    imgSalaImatge.loadImage(ofToDataPath("IMG/salaimatge-fonsnet.png"));
+    imgQuadreCezanne.loadImage(ofToDataPath("IMG/cezanne.jpg"));
+    textTracPintemG.allocate(camWidth, camHeight, GL_RGBA);
+    textTracPintemP.allocate(camWidth, camHeight, GL_RGBA);
+    pixelsText = new unsigned char[camWidth*camHeight*4];
+    pixelsGrayImage = new unsigned char[camWidth*camHeight];
+
 
     // ESCENA 1
-    guiESCENA1 = new ofxUICanvas(0, 0, ofGetWidth()/5, ofGetHeight());
-    guiESCENA1->addLabel("ESCENA1", OFX_UI_FONT_MEDIUM);
+    guiESCENA = new ofxUICanvas(0, 0, ofGetWidth()/5, ofGetHeight());
+    guiESCENA->addWidgetDown(new ofxUILabel("ESCENES", OFX_UI_FONT_LARGE));
+    guiESCENA->addSpacer(2);
+    guiESCENA->addLabel("ESCENA1", OFX_UI_FONT_MEDIUM);
 	vector<string> vnames;
-	vnames.push_back("ENTRADA");    // estatEscena1 = 1
-	vnames.push_back("ESBORRA");    // estatEscena1 = 2
-	vnames.push_back("LLAPIS");     // estatEscena1 = 3
-	vnames.push_back("GARGOTS");    // 4
-	vnames.push_back("TRENCA");     // 5
-	vnames.push_back("BORRA alpha");// 6
-	vnames.push_back("TAQUES");     // 7
-	vnames.push_back("BORRA FI");   // 8
-	guiESCENA1->addRadio("escena1", vnames, OFX_UI_ORIENTATION_VERTICAL);
+	vnames.push_back("1ENTRADA");    // estatEscena1 = 1
+	vnames.push_back("1ESBORRA");    // estatEscena1 = 2
+	vnames.push_back("1LLAPIS");     // estatEscena1 = 3
+	vnames.push_back("1GARGOTS");    // 4
+	vnames.push_back("1TRENCA");     // 5
+	vnames.push_back("1BORRA alpha");// 6
+	vnames.push_back("1TAQUES");     // 7
+	vnames.push_back("1BORRA fi");   // 8
+	guiESCENA->addRadio("escena1", vnames, OFX_UI_ORIENTATION_VERTICAL);
+	guiESCENA->addSpacer(2);
+	guiESCENA->addLabel("ESCENA2", OFX_UI_FONT_MEDIUM);
+	vnames.clear();
+	vnames.push_back("2CEZANNE");   // estatEscena2 = 1
+	vnames.push_back("2PINTA GP");  // estatEscena2 = 2
+	vnames.push_back("2BORRA G");   // estatEscena2 = 3
+	vnames.push_back("2RATLLOTS");  // 4
+	guiESCENA->addRadio("escena2", vnames, OFX_UI_ORIENTATION_VERTICAL);
+	guiESCENA->addSpacer(2);
 
-	ofAddListener(guiESCENA1->newGUIEvent,this,&testApp::guiEvent);
+	ofAddListener(guiESCENA->newGUIEvent,this,&testApp::guiEvent);
     estatEscena1 = 0; // idle
+    estatEscena2 = 0;
 }
 
 //--------------------------------------------------------------
@@ -272,9 +285,49 @@ void testApp::update(){
 
 		if(bpintaPantallaG){
             grayImagePintaPantallaG += grayImageThPantallaG;
+            pixelsGrayImage = grayImagePintaPantallaG.getPixels();
+
+            for (int i=0; i<camWidth; i++){
+                for (int j=0; j<camHeight; j++){
+                    int pos = (j*camWidth+i);
+                    if(pixelsGrayImage[pos] > 0){
+                        pixelsText[pos*4  ] = 255;
+                        pixelsText[pos*4+1] = 255;
+                        pixelsText[pos*4+2] = 255;
+                        pixelsText[pos*4+3] = 255;
+                    }
+                    else{
+                        pixelsText[pos*4  ] = 0;
+                        pixelsText[pos*4+1] = 0;
+                        pixelsText[pos*4+2] = 0;
+                        pixelsText[pos*4+3] = 0;
+                    }
+                }
+            }
+            textTracPintemG.loadData(pixelsText, camWidth,camHeight, GL_RGBA);
 		}
 		if(bpintaPantallaP){
 		    grayImagePintaPantallaP += grayImageThPantallaP;
+            pixelsGrayImage = grayImagePintaPantallaP.getPixels();
+
+            for (int i=0; i<camWidth; i++){
+                for (int j=0; j<camHeight; j++){
+                    int pos = (j*camWidth+i);
+                    if(pixelsGrayImage[pos] > 0){
+                        pixelsText[pos*4  ] = 255;
+                        pixelsText[pos*4+1] = 255;
+                        pixelsText[pos*4+2] = 255;
+                        pixelsText[pos*4+3] = 255;
+                    }
+                    else{
+                        pixelsText[pos*4  ] = 0;
+                        pixelsText[pos*4+1] = 0;
+                        pixelsText[pos*4+2] = 0;
+                        pixelsText[pos*4+3] = 0;
+                    }
+                }
+            }
+            textTracPintemP.loadData(pixelsText, camWidth,camHeight, GL_RGBA);
 		}
 
 		if(bclearPantallaG){
@@ -293,8 +346,7 @@ void testApp::update(){
 void testApp::draw(){
 
     ofSetWindowTitle("Pais Sense Paraules");
-    ofBackground(40);
-    ofDisableAlphaBlending();
+    ofBackground(10);
 
     // imatge cam
     ofSetColor(255,255,255);
@@ -351,129 +403,12 @@ void testApp::draw(){
     }
 
     ofPushStyle();
-    if(estatEscena1 == 0){
-        ofSetColor(0,0,0,255);
-        ofRect(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
-        ofRect(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
-    }
-    if(estatEscena1 == 1){ // ENTRADA
-        ofSetColor(0,0,0,255);
-        ofRect(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
-
-        ofSetColor(255,255,255,255);
-        imgSalaSo.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
-    }
-    if(estatEscena1 == 2){ // ESBORRA
-        ofSetColor(0,0,0,255);
-        ofRect(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
-
-        // http://stackoverflow.com/questions/5097145/opengl-mask-with-multiple-textures
-
-        ofSetColor(255,255,255,255);
-        imgSalaSo.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
-        glEnable(GL_BLEND);
-        // we want a blendfunc that doesn't change the color of any pixels,
-        // but rather replaces the framebuffer alpha values with values based
-        // on the whiteness of the mask. In other words, if a pixel is white in the mask,
-        // then the corresponding framebuffer pixel's alpha will be set to 1.
-        glBlendFuncSeparate(GL_ZERO, GL_ONE, GL_SRC_COLOR, GL_ZERO);
-        // Now "draw" the mask (again, this doesn't produce a visible result, it just
-        // changes the alpha values in the framebuffer)
-        grayImagePintaPantallaP.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
-        // Finally, we want a blendfunc that makes the foreground visible only in
-        // areas with high alpha.
-        glBlendFuncSeparate(GL_SRC_COLOR, GL_DST_COLOR, GL_ZERO, GL_DST_ALPHA);
-        ofSetColor(255,0,0);
-        grayImagePintaPantallaP.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
-        capturaElQuePintaIlona.grabScreen(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
-
+        if(estatEscena1 != 0){
+            drawEscena1();
         }
-    if(estatEscena1 == 3){ // LLAPIS
-        ofSetColor(0,0,0,255);
-        ofRect(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
-
-        // pinta sobre fons negre
-        ofSetColor(255,255,255,255);
-        capturaElQuePintaIlona.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
-        glEnable(GL_BLEND);
-        glBlendFuncSeparate(GL_ONE, GL_DST_COLOR, GL_SRC_COLOR, GL_DST_ALPHA);
-        ofSetColor(255,255,0);
-        grayImagePintaPantallaP.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
-        glDisable(GL_BLEND);
-        //capturaElQuePintaIlona.grabScreen(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
-    }
-    if(estatEscena1 == 4){ // GARGOTS
-        ofSetColor(0,0,0,255);
-        ofRect(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
-
-        // pinta sobre fons negre
-        ofSetColor(255,255,255,255);
-        capturaElQuePintaIlona.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
-        glEnable(GL_BLEND);
-        glBlendFuncSeparate(GL_ONE, GL_DST_COLOR, GL_SRC_COLOR, GL_DST_ALPHA);
-        ofSetColor(255,100,50);
-        grayImagePintaPantallaP.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
-        glDisable(GL_BLEND);
-        capturaElQuePintaIlona.grabScreen(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
-    }
-    if(estatEscena1 == 5){ // TRENCA
-        ofSetColor(0,0,0,255);
-        ofRect(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
-
-        // pinta sobre fons negre
-        ofSetColor(255,255,255,255);
-        capturaElQuePintaIlona.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
-        glEnable(GL_BLEND);
-        glBlendFuncSeparate(GL_ONE, GL_DST_COLOR, GL_SRC_COLOR, GL_DST_ALPHA);
-        ofSetColor(255,200,200);
-        grayImagePintaPantallaP.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
-        glDisable(GL_BLEND);
-        capturaElQuePintaIlona.grabScreen(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
-    }
-    if(estatEscena1 == 6){ // BORRA alpha
-        ofSetColor(0,0,0,255);
-        ofRect(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
-
-        ofSetColor(255,255,255,255);
-        ofBlendMode(OF_BLENDMODE_ALPHA);
-        glEnable(GL_BLEND);
-        glBlendFunc(GL_ONE, GL_ZERO);
-        capturaElQuePintaIlona.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
-        glBlendFunc(GL_SRC_ALPHA, GL_DST_ALPHA);
-        grayImagePintaPantallaP.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
-        glBlendFunc(GL_SRC_COLOR, GL_DST_COLOR);
-        grayImagePintaPantallaP.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
-        capturaElQuePintaIlona.grabScreen(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
-    }
-    if(estatEscena1 == 7){ // TAQUES
-        ofSetColor(0,0,0,255);
-        ofRect(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
-
-        // pinta sobre fons negre
-        ofSetColor(255,255,255,255);
-        capturaElQuePintaIlona.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
-        glEnable(GL_BLEND);
-        glBlendFuncSeparate(GL_ONE, GL_DST_COLOR, GL_SRC_COLOR, GL_DST_ALPHA);
-        ofSetColor(255,0,30);
-        grayImagePintaPantallaP.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
-        glDisable(GL_BLEND);
-        capturaElQuePintaIlona.grabScreen(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
-    }
-    if(estatEscena1 == 8){ // BORRA FI
-        ofSetColor(0,0,0,255);
-        ofRect(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
-
-        ofSetColor(255,255,255,255);
-        ofBlendMode(OF_BLENDMODE_ALPHA);
-        glEnable(GL_BLEND);
-        glBlendFunc(GL_ONE, GL_ZERO);
-        capturaElQuePintaIlona.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
-        glBlendFunc(GL_SRC_ALPHA, GL_DST_ALPHA);
-        grayImagePintaPantallaP.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
-        glBlendFunc(GL_CONSTANT_COLOR, GL_DST_COLOR);
-
-        //grayImagePintaPantallaP.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
-    }
+        if(estatEscena2 != 0){
+            drawEscena2();
+        }
     ofPopStyle();
 }
 
@@ -500,13 +435,13 @@ void testApp::keyPressed(int key){
 			guiP->toggleVisible();
 			guiG2->toggleVisible();
 			guiP2->toggleVisible();
-			guiESCENA1->toggleVisible();
+			guiESCENA->toggleVisible();
 			break;
         case 'a':
             guiAPP->toggleVisible();
 			break;
         case '1':
-            guiESCENA1->toggleVisible();
+            guiESCENA->toggleVisible();
 			break;
 	}
 }
@@ -529,27 +464,22 @@ void testApp::mouseDragged(int x, int y, int button){
 //--------------------------------------------------------------
 void testApp::mousePressed(int x, int y, int button){
      if(button==0){
-         if(setWARPQUADPantallaG == 0){
-         }
-         else if(setWARPQUADPantallaG > 0){
-                 warpSrcPantallaG[setWARPQUADPantallaG-1].x = x;
-                 warpSrcPantallaG[setWARPQUADPantallaG-1].y = y;
-                 setWARPQUADPantallaG++;
-         }
-         else if (setWARPQUADPantallaG == 5){
-                 setWARPQUADPantallaG = 0;
-         }
-
-         if(setWARPQUADPantallaP == 0){
-         }
-         else if(setWARPQUADPantallaP > 0){
-                 warpSrcPantallaP[setWARPQUADPantallaP-1].x = x;
-                 warpSrcPantallaP[setWARPQUADPantallaP-1].y = y;
-                 setWARPQUADPantallaP++;
-         }
-         else if (setWARPQUADPantallaP == 5){
-                 setWARPQUADPantallaP = 0;
-         }
+        if (setWARPQUADPantallaG == 5){
+             setWARPQUADPantallaG = 0;
+        }
+        if(setWARPQUADPantallaG > 0){
+             warpSrcPantallaG[setWARPQUADPantallaG-1].x = x;
+             warpSrcPantallaG[setWARPQUADPantallaG-1].y = y;
+             setWARPQUADPantallaG++;
+        }
+        if (setWARPQUADPantallaP == 5){
+             setWARPQUADPantallaP = 0;
+        }
+        if(setWARPQUADPantallaP > 0){
+             warpSrcPantallaP[setWARPQUADPantallaP-1].x = x;
+             warpSrcPantallaP[setWARPQUADPantallaP-1].y = y;
+             setWARPQUADPantallaP++;
+        }
      }
 }
 
@@ -571,6 +501,154 @@ void testApp::gotMessage(ofMessage msg){
 //--------------------------------------------------------------
 void testApp::dragEvent(ofDragInfo dragInfo){
 
+}
+
+//--------------------------------------------------------------
+void testApp::drawEscena1(){
+
+    if(estatEscena1 == 1){ // ENTRADA
+        ofSetColor(0,0,0,255);
+        ofRect(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
+
+        ofSetColor(255,255,255,255);
+        imgSalaSo.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
+    }
+    else if(estatEscena1 == 2){ // ESBORRA
+        ofSetColor(0,0,0,255);
+        ofRect(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
+
+        // http://stackoverflow.com/questions/5097145/opengl-mask-with-multiple-textures
+        // http://forum.openframeworks.cc/index.php/topic,339.0.html -> solucio crear textura a ma
+        ofEnableAlphaBlending();
+        ofSetColor(255,255,255,255);
+        imgSalaSo.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
+        ofSetColor(0,0,0,255);
+        textTracPintemP.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
+        ofDisableAlphaBlending();
+    }
+    else if(estatEscena1 == 3){ // LLAPIS
+        ofSetColor(0,0,0,255);
+        ofRect(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
+
+        ofEnableAlphaBlending();
+        ofSetColor(255,255,255,255);
+        capturaElQuePintaIlona.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
+        ofSetColor(255,200,0,255);
+        textTracPintemP.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
+        ofDisableAlphaBlending();
+    }
+    else if(estatEscena1 == 4){ // GARGOTS
+        ofSetColor(0,0,0,255);
+        ofRect(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
+
+        ofEnableAlphaBlending();
+        ofSetColor(255,255,255,255);
+        capturaElQuePintaIlona.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
+        ofSetColor(255,0,0,255);
+        textTracPintemP.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
+        ofDisableAlphaBlending();
+    }
+    else if(estatEscena1 == 5){ // TRENCA
+        ofSetColor(0,0,0,255);
+        ofRect(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
+
+        ofEnableAlphaBlending();
+        ofSetColor(255,255,255,255);
+        capturaElQuePintaIlona.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
+        ofSetColor(255,255,255,255);
+        textTracPintemP.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
+        ofDisableAlphaBlending();
+    }
+    else if(estatEscena1 == 6){ // BORRA alpha
+        ofSetColor(0,0,0,255);
+        ofRect(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
+
+        ofEnableAlphaBlending();
+        ofSetColor(255,255,255,255);
+        capturaElQuePintaIlona.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
+        ofSetColor(0,0,0,128);
+        textTracPintemP.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
+        ofDisableAlphaBlending();
+    }
+    else if(estatEscena1 == 7){ // TAQUES
+        ofSetColor(0,0,0,255);
+        ofRect(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
+
+        ofEnableAlphaBlending();
+        ofSetColor(255,255,255,255);
+        capturaElQuePintaIlona.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
+        ofSetColor(200,20,0,255);
+        textTracPintemP.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
+        ofDisableAlphaBlending();
+    }
+    else if(estatEscena1 == 8){ // BORRA FI
+        ofSetColor(0,0,0,255);
+        ofRect(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
+
+        ofEnableAlphaBlending();
+        ofSetColor(255,255,255,255);
+        capturaElQuePintaIlona.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
+        ofSetColor(0,0,0,255);
+        textTracPintemP.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
+        ofDisableAlphaBlending();
+    }
+}
+
+//--------------------------------------------------------------
+void testApp::drawEscena2(){
+
+    if(estatEscena2 == 1){ // CEZZANE
+        ofSetColor(255,255,255,255);
+        imgQuadreCezanne.draw(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
+
+        ofSetColor(50,50,255,255);
+        ofRect(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
+    }
+    if(estatEscena2 == 2){ // PINTA GP
+        ofEnableAlphaBlending();
+        ofSetColor(255,255,255,255);
+        imgQuadreCezanne.draw(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
+        ofSetColor(50,50,255,255);
+        textTracPintemG.draw(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
+        ofDisableAlphaBlending();
+
+        ofEnableAlphaBlending();
+        ofSetColor(50,50,255,255);
+        ofRect(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);ofSetColor(0,0,0,255);
+        ofSetColor(50,250,55,255);
+        textTracPintemP.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
+        ofDisableAlphaBlending();
+    }
+    if(estatEscena2 == 3){ // BORRA G
+        ofEnableAlphaBlending();
+        ofSetColor(255,255,255,255);
+        capturaElQuePintaIlona.draw(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
+        ofSetColor(0,0,0,255);
+        textTracPintemG.draw(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
+        ofDisableAlphaBlending();
+
+        ofEnableAlphaBlending();
+        ofSetColor(50,50,255,255);
+        ofRect(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);ofSetColor(0,0,0,255);
+        ofSetColor(50,250,55,255);
+        textTracPintemP.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
+        ofDisableAlphaBlending();
+    }
+    if(estatEscena2 == 4){ // RATLLOTS a la gran
+        ofEnableAlphaBlending();
+        ofSetColor(255,255,255,255);
+        capturaElQuePintaIlona.draw(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
+        ofSetColor(255,255,255,255);
+        textTracPintemG.draw(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
+        ofDisableAlphaBlending();
+
+        ofEnableAlphaBlending();
+        ofSetColor(50,50,255,255);
+        ofRect(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);ofSetColor(0,0,0,255);
+        ofSetColor(50,250,55,255);
+        textTracPintemP.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
+        ofDisableAlphaBlending();
+    }
 }
 
 //--------------------------------------------------------------
@@ -682,17 +760,17 @@ void testApp::guiEvent(ofxUIEventArgs &e)
 		blue = slider->getScaledValue();
 		ofLog(OF_LOG_NOTICE, "PSP: blue: " + ofToString(blue));
 	}
-	else if(name == "bsetWARPQUADPantallaG"){
+	else if(name == "bsetWARPPantallaG"){
 		ofxUIButton *button = (ofxUIButton *) e.widget;
-		bsetWARPQUADPantallaG = button->getValue();
-		ofLog(OF_LOG_NOTICE, "PSP: bsetWARPQUADPantallaG: " + ofToString(bsetWARPQUADPantallaG));
+		bsetWARPPantallaG = button->getValue();
+		ofLog(OF_LOG_NOTICE, "PSP: bsetWARPPantallaG: " + ofToString(bsetWARPPantallaG));
 		setWARPQUADPantallaG = 1;
 		ofLog(OF_LOG_NOTICE, "PSP: setWARPQUADPantallaG: " + ofToString(setWARPQUADPantallaG) + " to start warping");
 	}
-	else if(name == "bsetWARPQUADPantallaP"){
+	else if(name == "bsetWARPPantallaP"){
 		ofxUIButton *button = (ofxUIButton *) e.widget;
-		bsetWARPQUADPantallaP = button->getValue();
-		ofLog(OF_LOG_NOTICE, "PSP: bsetWARPQUADPantallaP: " + ofToString(bsetWARPQUADPantallaP));
+		bsetWARPPantallaP = button->getValue();
+		ofLog(OF_LOG_NOTICE, "PSP: bsetWARPPantallaP: " + ofToString(bsetWARPPantallaP));
 		setWARPQUADPantallaP = 1;
 		ofLog(OF_LOG_NOTICE, "PSP: setWARPQUADPantallaP: " + ofToString(setWARPQUADPantallaP) + " to start warping");
 	}
@@ -736,16 +814,6 @@ void testApp::guiEvent(ofxUIEventArgs &e)
 		thresholdPantallaP = slider->getScaledValue();
 		ofLog(OF_LOG_NOTICE, "PSP: thresholdPantallaP: " + ofToString(thresholdPantallaP));
 	}
-	else if(name == "bpintaPantallaG"){
-		ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
-		bpintaPantallaG = toggle->getValue();
-		ofLog(OF_LOG_NOTICE, "PSP: bpintaPantallaG: " + ofToString(bpintaPantallaG));
-	}
-	else if(name == "bpintaPantallaP"){
-		ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
-		bpintaPantallaP = toggle->getValue();
-		ofLog(OF_LOG_NOTICE, "PSP: bpintaPantallaP: " + ofToString(bpintaPantallaP));
-	}
 	else if(name == "bclearPantallaG"){
 		ofxUIButton *button = (ofxUIButton *) e.widget;
 		bclearPantallaG = button->getValue();
@@ -756,54 +824,76 @@ void testApp::guiEvent(ofxUIEventArgs &e)
 		bclearPantallaP = button->getValue();
 		ofLog(OF_LOG_NOTICE, "PSP: bclearPantallaP: " + ofToString(bclearPantallaP));
 	}
-	else if(name == "bimgPantallaG"){
-		ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
-		bimgPantallaG = toggle->getValue();
-		ofLog(OF_LOG_NOTICE, "PSP: bimgPantallaG: " + ofToString(bimgPantallaG));
-	}
-	else if(name == "bimgPantallaP"){
-		ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
-		bimgPantallaP = toggle->getValue();
-		ofLog(OF_LOG_NOTICE, "PSP: bimgPantallaP: " + ofToString(bimgPantallaP));
-	}
+
 	// ESCENA 1
-	else if(name == "ENTRADA"){
+	else if(name == "1ENTRADA"){
 		estatEscena1 = 1;
 	}
-	else if(name == "ESBORRA"){
+	else if(name == "1ESBORRA"){
 		estatEscena1 = 2;
 		bclearPantallaP = true;
 		bpintaPantallaP = true;
 	}
-	else if(name == "LLAPIS"){
-		estatEscena1 = 3;
+	else if(name == "1LLAPIS"){
+	    estatEscena1 = 3;
 		bclearPantallaP = true;
 		bpintaPantallaP = true;
+		capturaElQuePintaIlona.grabScreen(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
 	}
-	else if(name == "GARGOTS"){
+	else if(name == "1GARGOTS"){
 		estatEscena1 = 4;
 		bclearPantallaP = true;
 		bpintaPantallaP = true;
+        capturaElQuePintaIlona.grabScreen(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
 	}
-	else if(name == "TRENCA"){
+	else if(name == "1TRENCA"){
         estatEscena1 = 5;
         bclearPantallaP = true;
 		bpintaPantallaP = true;
+        capturaElQuePintaIlona.grabScreen(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
 	}
-	else if(name == "BORRA alpha"){
+	else if(name == "1BORRA alpha"){
 		estatEscena1 = 6;
 		bclearPantallaP = true;
 		bpintaPantallaP = true;
+        capturaElQuePintaIlona.grabScreen(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
 	}
-	else if(name == "TAQUES"){
+	else if(name == "1TAQUES"){
 		estatEscena1 = 7;
 		bclearPantallaP = true;
 		bpintaPantallaP = true;
+        capturaElQuePintaIlona.grabScreen(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
 	}
-	else if(name == "BORRA FI"){
+	else if(name == "1BORRA fi"){
 		estatEscena1 = 8;
 		bclearPantallaP = true;
 		bpintaPantallaP = true;
 	}
+	else if(name == "2CEZANNE"){
+		estatEscena1 = 0;
+		estatEscena2 = 1;
+	}
+	else if(name == "2PINTA GP"){
+		estatEscena2 = 2;
+		bclearPantallaG = true;
+		bpintaPantallaG = true;
+		bclearPantallaP = true;
+		bpintaPantallaP = true;
+	}
+	else if(name == "2BORRA G"){
+		estatEscena2 = 3;
+		capturaElQuePintaIlona.grabScreen(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
+        bclearPantallaG = true;
+		bpintaPantallaG = true;
+		bpintaPantallaP = true;
+	}
+	else if(name == "2RATLLOTS"){
+		estatEscena2 = 4;
+		capturaElQuePintaIlona.grabScreen(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
+        bclearPantallaG = true;
+		bpintaPantallaG = true;
+		bpintaPantallaP = true;
+	}
+
 }
 

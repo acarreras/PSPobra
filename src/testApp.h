@@ -42,7 +42,7 @@ class testApp : public ofBaseApp{
 
         // GUI
         ofxUICanvas             *guiAPP, *guiG, *guiP, *guiG2, *guiP2;
-        ofxUICanvas             *guiESCENA1;
+        ofxUICanvas             *guiESCENA;
 
         // OPENCV
         ofxCvColorImage         colorImgPantalla;
@@ -60,7 +60,7 @@ class testApp : public ofBaseApp{
         int camWidth, camHeight;
 
 		// WARP CAMERA IMAGE
-		bool bsetWARPQUADPantallaG, bsetWARPQUADPantallaP;
+		bool bsetWARPPantallaG, bsetWARPPantallaP;
 		int setWARPQUADPantallaG, setWARPQUADPantallaP;
         ofPoint             warpSrcPantallaG[4], warpSrcPantallaP[4];
 		ofPoint             warpDstPantallaG[4], warpDstPantallaP[4];
@@ -71,15 +71,23 @@ class testApp : public ofBaseApp{
 
         // COLOR pinta PANTALLA
         int red, green, blue;
+        ofTexture textTracPintemG, textTracPintemP;
+        unsigned char * pixelsText;
+        unsigned char * pixelsGrayImage;
 
-        // IMATGES
-        bool bimgPantallaG, bimgPantallaP;
+        // ESCENES
+        ofImage capturaElQuePintaIlona;
 
         // ESCENA 1
+        void drawEscena1();
         int estatEscena1;
         ofImage imgNegra;
-        ofImage imgSalaSo, imgSalaImatge;
-        ofImage capturaElQuePintaIlona;
+        ofImage imgSalaSo;
+
+        // ESCENA 2
+        void drawEscena2();
+        int estatEscena2;
+        ofImage imgQuadreCezanne;
 
 };
 
