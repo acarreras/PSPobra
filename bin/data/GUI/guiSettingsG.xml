@@ -1,0 +1,44 @@
+<Widget>
+    <Kind>2</Kind>
+    <Name>flipVpantallaG</Name>
+    <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>flipHpantallaG</Name>
+    <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>2</Kind>
+    <Name>bthinvertPantallaG</Name>
+    <Value>0</Value>
+</Widget>
+<Widget>
+    <Kind>4</Kind>
+    <Name>thresholdPantallaG</Name>
+    <Value>187.346940637</Value>
+</Widget>
+<Widget>
+    <Kind>11</Kind>
+    <Name>warpSrcPantallaG0</Name>
+    <XValue>19.925926208</XValue>
+    <YValue>170.666667938</YValue>
+</Widget>
+<Widget>
+    <Kind>11</Kind>
+    <Name>warpSrcPantallaG1</Name>
+    <XValue>6.925926208</XValue>
+    <YValue>290.200012207</YValue>
+</Widget>
+<Widget>
+    <Kind>11</Kind>
+    <Name>warpSrcPantallaG2</Name>
+    <XValue>500.622222900</XValue>
+    <YValue>418.133331299</YValue>
+</Widget>
+<Widget>
+    <Kind>11</Kind>
+    <Name>warpSrcPantallaG3</Name>
+    <XValue>197.874069214</XValue>
+    <YValue>171.066661835</YValue>
+</Widget>

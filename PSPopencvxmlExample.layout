@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_layout_file>
+	<ActiveTarget name="release" />
+	<File name="..\..\..\addons\ofxOpenCv\src\ofxCvBlob.h" open="0" top="0" tabpos="0">
+		<Cursor position="1593" topLine="0" />
+	</File>
+	<File name="..\..\..\addons\ofxOpenCv\src\ofxCvContourFinder.h" open="0" top="0" tabpos="3">
+		<Cursor position="1020" topLine="31" />
+	</File>
+	<File name="..\..\..\addons\ofxOpenCv\src\ofxCvImage.h" open="0" top="0" tabpos="3">
+		<Cursor position="2035" topLine="48" />
+	</File>
+	<File name="..\..\..\addons\ofxUI\src\ofxUI.h" open="0" top="0" tabpos="0">
+		<Cursor position="585" topLine="0" />
+	</File>
+	<File name="..\..\..\addons\ofxUI\src\ofxUI2DPad.h" open="0" top="0" tabpos="0">
+		<Cursor position="14797" topLine="457" />
+	</File>
+	<File name="..\..\..\addons\ofxUI\src\ofxUIRadio.h" open="0" top="0" tabpos="0">
+		<Cursor position="585" topLine="188" />
+	</File>
+	<File name="..\..\..\addons\ofxUI\src\ofxUISlider.h" open="0" top="0" tabpos="0">
+		<Cursor position="9278" topLine="332" />
+	</File>
+	<File name="src\main.cpp" open="1" top="0" tabpos="3">
+		<Cursor position="216" topLine="0" />
+	</File>
+	<File name="src\testApp.cpp" open="1" top="1" tabpos="1">
+		<Cursor position="17467" topLine="368" />
+	</File>
+	<File name="src\testApp.h" open="1" top="0" tabpos="2">
+		<Cursor position="2456" topLine="62" />
+	</File>
+</CodeBlocks_layout_file>
