@@ -77,17 +77,9 @@ class testApp : public ofBaseApp{
 
         // ESCENES
         ofImage capturaElQuePintaIlonaG, capturaElQuePintaIlonaP;
-
-        // ESCENA 1
-        void drawEscena1();
-        int estatEscena1;
-        ofImage imgNegra;
-        ofImage imgSalaSo;
-
-        // ESCENA 2
-        void drawEscena2();
-        int estatEscena2;
-        ofImage imgQuadreCezanne;
+        void drawPantallaP();
+        void drawPantallaG();
+        int estatEscenaPantallaP, estatEscenaPantallaG;
 
 };
 

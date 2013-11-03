@@ -11,10 +11,13 @@
 		<Cursor position="2035" topLine="48" />
 	</File>
 	<File name="..\..\..\addons\ofxUI\src\ofxUI.h" open="0" top="0" tabpos="0">
-		<Cursor position="585" topLine="0" />
+		<Cursor position="716" topLine="247" />
 	</File>
 	<File name="..\..\..\addons\ofxUI\src\ofxUI2DPad.h" open="0" top="0" tabpos="0">
 		<Cursor position="14797" topLine="457" />
+	</File>
+	<File name="..\..\..\addons\ofxUI\src\ofxUIBaseDraws.h" open="0" top="0" tabpos="0">
+		<Cursor position="990" topLine="117" />
 	</File>
 	<File name="..\..\..\addons\ofxUI\src\ofxUIRadio.h" open="0" top="0" tabpos="0">
 		<Cursor position="585" topLine="188" />
@@ -26,9 +29,9 @@
 		<Cursor position="216" topLine="0" />
 	</File>
 	<File name="src\testApp.cpp" open="1" top="1" tabpos="1">
-		<Cursor position="26529" topLine="642" />
+		<Cursor position="21485" topLine="513" />
 	</File>
 	<File name="src\testApp.h" open="1" top="0" tabpos="3">
-		<Cursor position="2525" topLine="69" />
+		<Cursor position="2622" topLine="61" />
 	</File>
 </CodeBlocks_layout_file>
