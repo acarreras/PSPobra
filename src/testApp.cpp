@@ -214,6 +214,7 @@ void testApp::setup(){
     guiESCENA->addSpacer(2);
     guiESCENA->addLabel("PANTALLA PETITA", OFX_UI_FONT_MEDIUM);
 	vector<string> vnames;
+	vnames.push_back("PpintaNO");
 	vnames.push_back("PiniciBLANC");    // estatEscenaPantallaP = 0
 	vnames.push_back("PiniciNEGRE");    // estatEscenaPantallaP = 1
 	vnames.push_back("PpintaGROC");     // 2
@@ -231,6 +232,7 @@ void testApp::setup(){
 	guiESCENA->addSpacer(2);
 	guiESCENA->addLabel("PANTALLA GRAN", OFX_UI_FONT_MEDIUM);
 	vnames.clear();
+	vnames.push_back("GpintaNO");
 	vnames.push_back("GiniciBLANC");    // 0
 	vnames.push_back("GiniciNEGRE");    // 1
 	vnames.push_back("GpintaROSA");     // 2
@@ -245,6 +247,8 @@ void testApp::setup(){
 
     guiESCENA->setColorBack(ofColor(0,0,0,0));
 	ofAddListener(guiESCENA->newGUIEvent,this,&testApp::guiEvent);
+    bpintaPantallaP = false;
+    bpintaPantallaG = false;
     estatEscenaPantallaP = 0;
     estatEscenaPantallaG = 0;
 }
@@ -399,13 +403,9 @@ void testApp::draw(){
         ofCircle(warpSrcPantallaP[2],3);
         ofCircle(warpSrcPantallaP[3],3);
 
-        ofSetColor(red, green, blue);
-        if(bpintaPantallaG){
-            grayImagePintaPantallaG.draw(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
-        }
-        if(bpintaPantallaP){
-            grayImagePintaPantallaP.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
-        }
+        //grayImagePintaPantallaG.draw(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
+        //grayImagePintaPantallaP.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
+
         ofPopStyle();
     }
     else{ // escena
@@ -441,11 +441,11 @@ void testApp::keyPressed(int key){
 			guiP2->toggleVisible();
 			guiESCENA->toggleVisible();
 			break;
-        case 'a':
-            guiAPP->toggleVisible();
-			break;
         case '1':
             guiESCENA->toggleVisible();
+			break;
+        case 'f':
+            ofToggleFullscreen();
 			break;
 	}
 }
@@ -510,150 +510,162 @@ void testApp::dragEvent(ofDragInfo dragInfo){
 //--------------------------------------------------------------
 void testApp::drawPantallaP(){
 
-    // pantalla petita
-    if(estatEscenaPantallaP == 0){ // PiniciBLANC
-        ofSetColor(255,255,255,255);
-        ofRect(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
+    if(bpintaPantallaP){
+        // pantalla petita
+        if(estatEscenaPantallaP == 0){ // PiniciBLANC
+            ofSetColor(255,255,255,255);
+            ofRect(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
+        }
+        else if(estatEscenaPantallaP == 1){ // PiniciNEGRE
+            ofSetColor(0,0,0,255);
+            ofRect(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
+        }
+        else if(estatEscenaPantallaP == 2){ // PpintaGROC
+            // http://stackoverflow.com/questions/5097145/opengl-mask-with-multiple-textures
+            // http://forum.openframeworks.cc/index.php/topic,339.0.html -> solucio crear textura a ma
+            ofEnableAlphaBlending();
+            ofSetColor(255,255,255,255);
+            capturaElQuePintaIlonaP.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
+            ofSetColor(200,200,0,255);
+            textTracPintemP.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
+            ofDisableAlphaBlending();
+        }
+        else if(estatEscenaPantallaP == 3){ // PpintaVMLL
+            ofEnableAlphaBlending();
+            ofSetColor(255,255,255,255);
+            capturaElQuePintaIlonaP.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
+            ofSetColor(200,0,0,255);
+            textTracPintemP.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
+            ofDisableAlphaBlending();
+        }
+        else if(estatEscenaPantallaP == 4){ // PpintaGRANAT
+            ofEnableAlphaBlending();
+            ofSetColor(255,255,255,255);
+            capturaElQuePintaIlonaP.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
+            ofSetColor(128,0,0,255);
+            textTracPintemP.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
+            ofDisableAlphaBlending();
+        }
+        else if(estatEscenaPantallaP == 5){ // PpintaBLANC
+            ofEnableAlphaBlending();
+            ofSetColor(255,255,255,255);
+            capturaElQuePintaIlonaP.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
+            ofSetColor(255,255,255,255);
+            textTracPintemP.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
+            ofDisableAlphaBlending();
+        }
+        else if(estatEscenaPantallaP == 6){ // PpintaNEGRE
+            ofEnableAlphaBlending();
+            ofSetColor(255,255,255,255);
+            capturaElQuePintaIlonaP.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
+            ofSetColor(0,0,0,255);
+            textTracPintemP.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
+            ofDisableAlphaBlending();
+        }
+        else if(estatEscenaPantallaP == 7){ // PpintaBLANCalpha
+            ofEnableAlphaBlending();
+            ofSetColor(255,255,255,255);
+            capturaElQuePintaIlonaP.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
+            ofSetColor(255,255,255, 190);
+            textTracPintemP.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
+            ofDisableAlphaBlending();
+        }
+        else if(estatEscenaPantallaP == 8){ // PpintaNEGREalpha
+            ofEnableAlphaBlending();
+            ofSetColor(255,255,255,255);
+            capturaElQuePintaIlonaP.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
+            ofSetColor(0,0,0,190);
+            textTracPintemP.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
+            ofDisableAlphaBlending();
+        }
+        else if(estatEscenaPantallaP == 9){ // PpintaGRIS
+            ofEnableAlphaBlending();
+            ofSetColor(255,255,255,255);
+            capturaElQuePintaIlonaP.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
+            ofSetColor(128,128,128,255);
+            textTracPintemP.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
+            ofDisableAlphaBlending();
+        }
     }
-    else if(estatEscenaPantallaP == 1){ // PiniciNEGRE
-        ofSetColor(0,0,0,255);
-        ofRect(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
-    }
-    else if(estatEscenaPantallaP == 2){ // PpintaGROC
-        // http://stackoverflow.com/questions/5097145/opengl-mask-with-multiple-textures
-        // http://forum.openframeworks.cc/index.php/topic,339.0.html -> solucio crear textura a ma
-        ofEnableAlphaBlending();
+    else{
         ofSetColor(255,255,255,255);
         capturaElQuePintaIlonaP.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
-        ofSetColor(200,200,0,255);
-        textTracPintemP.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
-        ofDisableAlphaBlending();
-    }
-    else if(estatEscenaPantallaP == 3){ // PpintaVMLL
-        ofEnableAlphaBlending();
-        ofSetColor(255,255,255,255);
-        capturaElQuePintaIlonaP.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
-        ofSetColor(200,0,0,255);
-        textTracPintemP.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
-        ofDisableAlphaBlending();
-    }
-    else if(estatEscenaPantallaP == 4){ // PpintaGRANAT
-        ofEnableAlphaBlending();
-        ofSetColor(255,255,255,255);
-        capturaElQuePintaIlonaP.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
-        ofSetColor(128,0,0,255);
-        textTracPintemP.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
-        ofDisableAlphaBlending();
-    }
-    else if(estatEscenaPantallaP == 5){ // PpintaBLANC
-        ofEnableAlphaBlending();
-        ofSetColor(255,255,255,255);
-        capturaElQuePintaIlonaP.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
-        ofSetColor(255,255,255,255);
-        textTracPintemP.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
-        ofDisableAlphaBlending();
-    }
-    else if(estatEscenaPantallaP == 6){ // PpintaNEGRE
-        ofEnableAlphaBlending();
-        ofSetColor(255,255,255,255);
-        capturaElQuePintaIlonaP.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
-        ofSetColor(0,0,0,255);
-        textTracPintemP.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
-        ofDisableAlphaBlending();
-    }
-    else if(estatEscenaPantallaP == 7){ // PpintaBLANCalpha
-        ofEnableAlphaBlending();
-        ofSetColor(255,255,255,255);
-        capturaElQuePintaIlonaP.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
-        ofSetColor(255,255,255, 190);
-        textTracPintemP.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
-        ofDisableAlphaBlending();
-    }
-    else if(estatEscenaPantallaP == 8){ // PpintaNEGREalpha
-        ofEnableAlphaBlending();
-        ofSetColor(255,255,255,255);
-        capturaElQuePintaIlonaP.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
-        ofSetColor(0,0,0,190);
-        textTracPintemP.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
-        ofDisableAlphaBlending();
-    }
-    else if(estatEscenaPantallaP == 9){ // PpintaGRIS
-        ofEnableAlphaBlending();
-        ofSetColor(255,255,255,255);
-        capturaElQuePintaIlonaP.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
-        ofSetColor(128,128,128,255);
-        textTracPintemP.draw(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
-        ofDisableAlphaBlending();
     }
 }
 
 //--------------------------------------------------------------
 void testApp::drawPantallaG(){
 
-    // pantalla gran
-    if(estatEscenaPantallaG == 0){ // GiniciBLANC
-        ofSetColor(255,255,255,255);
-        ofRect(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
+    if(bpintaPantallaG){
+        // pantalla gran
+        if(estatEscenaPantallaG == 0){ // GiniciBLANC
+            ofSetColor(255,255,255,255);
+            ofRect(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
+        }
+        if(estatEscenaPantallaG == 1){ // GiniciNEGRE
+            ofSetColor(0,0,0,255);
+            ofRect(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
+        }
+        if(estatEscenaPantallaG == 2){ // GpintaROSA
+            ofEnableAlphaBlending();
+            ofSetColor(255,255,255,255);
+            capturaElQuePintaIlonaG.draw(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
+            ofSetColor(255,0,255,255);
+            textTracPintemG.draw(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
+            ofDisableAlphaBlending();
+        }
+        if(estatEscenaPantallaG == 3){ // GpintaBLAU
+            ofEnableAlphaBlending();
+            ofSetColor(255,255,255,255);
+            capturaElQuePintaIlonaG.draw(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
+            ofSetColor(0,0,200,255);
+            textTracPintemG.draw(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
+            ofDisableAlphaBlending();
+        }
+        if(estatEscenaPantallaG == 4){ // GpintaGRANAT
+            ofEnableAlphaBlending();
+            ofSetColor(255,255,255,255);
+            capturaElQuePintaIlonaG.draw(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
+            ofSetColor(100,0,0,255);
+            textTracPintemG.draw(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
+            ofDisableAlphaBlending();
+        }
+        if(estatEscenaPantallaG == 5){ // GpintaBLANC
+            ofEnableAlphaBlending();
+            ofSetColor(255,255,255,255);
+            capturaElQuePintaIlonaG.draw(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
+            ofSetColor(255,255,255,255);
+            textTracPintemG.draw(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
+            ofDisableAlphaBlending();
+        }
+        if(estatEscenaPantallaG == 6){ // GpintaNEGRE
+            ofEnableAlphaBlending();
+            ofSetColor(255,255,255,255);
+            capturaElQuePintaIlonaG.draw(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
+            ofSetColor(0,0,0,255);
+            textTracPintemG.draw(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
+            ofDisableAlphaBlending();
+        }
+        if(estatEscenaPantallaG == 7){ // GpintaBLANCalpha
+            ofEnableAlphaBlending();
+            ofSetColor(255,255,255,255);
+            capturaElQuePintaIlonaG.draw(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
+            ofSetColor(255,255,255,190);
+            textTracPintemG.draw(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
+            ofDisableAlphaBlending();
+        }
+        if(estatEscenaPantallaG == 8){ // GpintaNEGREalpha
+            ofEnableAlphaBlending();
+            ofSetColor(255,255,255,255);
+            capturaElQuePintaIlonaG.draw(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
+            ofSetColor(0,0,0,190);
+            textTracPintemG.draw(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
+            ofDisableAlphaBlending();
+        }
     }
-    if(estatEscenaPantallaG == 1){ // GiniciNEGRE
-        ofSetColor(0,0,0,255);
-        ofRect(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
-    }
-    if(estatEscenaPantallaG == 2){ // GpintaROSA
-        ofEnableAlphaBlending();
+    else{
         ofSetColor(255,255,255,255);
         capturaElQuePintaIlonaG.draw(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
-        ofSetColor(255,0,255,255);
-        textTracPintemG.draw(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
-        ofDisableAlphaBlending();
-    }
-    if(estatEscenaPantallaG == 3){ // GpintaBLAU
-        ofEnableAlphaBlending();
-        ofSetColor(255,255,255,255);
-        capturaElQuePintaIlonaG.draw(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
-        ofSetColor(0,0,200,255);
-        textTracPintemG.draw(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
-        ofDisableAlphaBlending();
-    }
-    if(estatEscenaPantallaG == 4){ // GpintaGRANAT
-        ofEnableAlphaBlending();
-        ofSetColor(255,255,255,255);
-        capturaElQuePintaIlonaG.draw(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
-        ofSetColor(100,0,0,255);
-        textTracPintemG.draw(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
-        ofDisableAlphaBlending();
-    }
-    if(estatEscenaPantallaG == 5){ // GpintaBLANC
-        ofEnableAlphaBlending();
-        ofSetColor(255,255,255,255);
-        capturaElQuePintaIlonaG.draw(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
-        ofSetColor(255,255,255,255);
-        textTracPintemG.draw(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
-        ofDisableAlphaBlending();
-    }
-    if(estatEscenaPantallaG == 6){ // GpintaNEGRE
-        ofEnableAlphaBlending();
-        ofSetColor(255,255,255,255);
-        capturaElQuePintaIlonaG.draw(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
-        ofSetColor(0,0,0,255);
-        textTracPintemG.draw(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
-        ofDisableAlphaBlending();
-    }
-    if(estatEscenaPantallaG == 7){ // GpintaBLANCalpha
-        ofEnableAlphaBlending();
-        ofSetColor(255,255,255,255);
-        capturaElQuePintaIlonaG.draw(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
-        ofSetColor(255,255,255,190);
-        textTracPintemG.draw(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
-        ofDisableAlphaBlending();
-    }
-    if(estatEscenaPantallaG == 8){ // GpintaNEGREalpha
-        ofEnableAlphaBlending();
-        ofSetColor(255,255,255,255);
-        capturaElQuePintaIlonaG.draw(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
-        ofSetColor(0,0,0,190);
-        textTracPintemG.draw(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
-        ofDisableAlphaBlending();
     }
 }
 
@@ -832,11 +844,17 @@ void testApp::guiEvent(ofxUIEventArgs &e)
 	}
 	// ESCENA
 	// pantalla petita
+	else if(name == "PpintaNO"){
+		bpintaPantallaP = false;
+        capturaElQuePintaIlonaP.grabScreen(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
+	}
 	else if(name == "PiniciBLANC"){
 		estatEscenaPantallaP = 0;
+		bpintaPantallaP = true;
 	}
 	else if(name == "PiniciNEGRE"){
 		estatEscenaPantallaP = 1;
+		bpintaPantallaP = true;
 	}
 	else if(name == "PpintaGROC"){
 	    estatEscenaPantallaP = 2;
@@ -887,11 +905,17 @@ void testApp::guiEvent(ofxUIEventArgs &e)
 		capturaElQuePintaIlonaP.grabScreen(imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP);
 	}
 	// pantalla gran
+	else if(name == "GpintaNO"){
+		bpintaPantallaG = false;
+		capturaElQuePintaIlonaG.grabScreen(imagePosXPantallaG, imagePosYPantallaG, imageWidthPantallaG, imageHeightPantallaG);
+	}
 	else if(name == "GiniciBLANC"){
 		estatEscenaPantallaG = 0;
+		bpintaPantallaG = true;
 	}
 	else if(name == "GiniciNEGRE"){
 		estatEscenaPantallaG = 1;
+		bpintaPantallaG = true;
 	}
 	else if(name == "GpintaROSA"){
 		estatEscenaPantallaG = 2;

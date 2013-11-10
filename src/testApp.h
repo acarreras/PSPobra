@@ -32,7 +32,6 @@ class testApp : public ofBaseApp{
         // APP PSP
         bool bcalibrant;
         bool bclearPantallaG, bclearPantallaP;
-        bool bpintaPantallaG, bpintaPantallaP;
 
         #ifdef _USE_LIVE_VIDEO
 		  ofVideoGrabber vidGrabber;
@@ -80,6 +79,7 @@ class testApp : public ofBaseApp{
         void drawPantallaP();
         void drawPantallaG();
         int estatEscenaPantallaP, estatEscenaPantallaG;
+        bool bpintaPantallaP, bpintaPantallaG;
 
 };
 
