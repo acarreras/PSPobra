@@ -69,10 +69,13 @@ class testApp : public ofBaseApp{
         int imagePosXPantallaP, imagePosYPantallaP, imageWidthPantallaP, imageHeightPantallaP;
 
         // COLOR pinta PANTALLA
-        int red, green, blue;
         ofTexture textTracPintemG, textTracPintemP;
         unsigned char * pixelsText;
         unsigned char * pixelsGrayImage;
+
+        // EXTENSIO PANTALLA
+        int screenWidth, screenHeight;
+        bool bextenPantalla;
 
         // ESCENES
         ofImage capturaElQuePintaIlonaG, capturaElQuePintaIlonaP;
@@ -80,6 +83,7 @@ class testApp : public ofBaseApp{
         void drawPantallaG();
         int estatEscenaPantallaP, estatEscenaPantallaG;
         bool bpintaPantallaP, bpintaPantallaG;
+        ofImage fonsPantallaP;
 
 };
 
