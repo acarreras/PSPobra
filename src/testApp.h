@@ -41,7 +41,7 @@ class testApp : public ofBaseApp{
 
         // GUI
         ofxUICanvas             *guiAPP, *guiG, *guiP, *guiG2, *guiP2;
-        ofxUICanvas             *guiESCENA;
+        ofxUICanvas             *guiESCENAP, *guiESCENAG;
 
         // OPENCV
         ofxCvColorImage         colorImgPantalla;
@@ -83,7 +83,7 @@ class testApp : public ofBaseApp{
         void drawPantallaG();
         int estatEscenaPantallaP, estatEscenaPantallaG;
         bool bpintaPantallaP, bpintaPantallaG;
-        ofImage fonsPantallaP;
+        ofImage fonsPantallaP, fonsPantallaG;
 
 };
 
