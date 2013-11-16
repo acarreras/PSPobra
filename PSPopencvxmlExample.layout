@@ -11,7 +11,7 @@
 		<Cursor position="2035" topLine="48" />
 	</File>
 	<File name="..\..\..\addons\ofxUI\src\ofxUI.h" open="0" top="0" tabpos="0">
-		<Cursor position="716" topLine="247" />
+		<Cursor position="5445" topLine="166" />
 	</File>
 	<File name="..\..\..\addons\ofxUI\src\ofxUI2DPad.h" open="0" top="0" tabpos="0">
 		<Cursor position="14797" topLine="457" />
@@ -19,17 +19,23 @@
 	<File name="..\..\..\addons\ofxUI\src\ofxUIBaseDraws.h" open="0" top="0" tabpos="0">
 		<Cursor position="990" topLine="117" />
 	</File>
+	<File name="..\..\..\addons\ofxUI\src\ofxUILabel.h" open="1" top="1" tabpos="4">
+		<Cursor position="4575" topLine="148" />
+	</File>
+	<File name="..\..\..\addons\ofxUI\src\ofxUILabelButton.h" open="1" top="0" tabpos="5">
+		<Cursor position="0" topLine="0" />
+	</File>
 	<File name="..\..\..\addons\ofxUI\src\ofxUIRadio.h" open="0" top="0" tabpos="0">
 		<Cursor position="585" topLine="188" />
 	</File>
 	<File name="..\..\..\addons\ofxUI\src\ofxUISlider.h" open="0" top="0" tabpos="0">
 		<Cursor position="9278" topLine="332" />
 	</File>
-	<File name="src\main.cpp" open="0" top="0" tabpos="2">
-		<Cursor position="231" topLine="0" />
+	<File name="src\main.cpp" open="1" top="0" tabpos="3">
+		<Cursor position="216" topLine="0" />
 	</File>
-	<File name="src\testApp.cpp" open="1" top="1" tabpos="1">
-		<Cursor position="21187" topLine="529" />
+	<File name="src\testApp.cpp" open="1" top="0" tabpos="1">
+		<Cursor position="17983" topLine="405" />
 	</File>
 	<File name="src\testApp.h" open="1" top="0" tabpos="2">
 		<Cursor position="2777" topLine="65" />
